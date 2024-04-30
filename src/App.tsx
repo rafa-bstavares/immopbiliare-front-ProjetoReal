@@ -16,7 +16,9 @@ function App() {
           <ModalSlideProvider>
             <PaginaPrincipal/>
             <PrimeiroCTA/>
+            {/*
             <QuemSomos/>
+            */}
             <div className='bg-verdeMaisEscuro text-white md:px-xGeralPc px-xGeralMobile py-4 '>
               Copyright &copy;2024 Rafael Tavares
             </div>
