@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { ContextoPesquisa } from "../../Contexts/ContextoPesquisa/ContextoPesquisa";
-import { ContextoElemCheck } from "../../Contexts/ContextoElemCheck/ContextoElemCheck";
 
 type Props = {
     item: string,

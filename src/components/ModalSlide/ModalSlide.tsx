@@ -1,9 +1,6 @@
 import { useContext, useEffect } from "react"
 import { ContextoModalSlide } from "../../Contexts/ContextoModalSlide/ContextoModalSlide"
-import EstruturaInfos from "../EstruturaInfos/EstruturaInfos"
 import ImovelPesquisa from "../ImovelPesquisa/ImovelPesquisa"
-import { GeralContext } from "../../Contexts/ContextGeral/ContextGeral"
-import { pesquisarImoveisId } from "../../Contexts/Functions/gettersFunctions"
 
 type Props = {
     id: string,
@@ -17,7 +14,7 @@ export default function ModalSlide({id, imgs}: Props){
         console.log(imgs)
     }, [])
 
-    const {setTemModalSlide, imovelModal} = useContext(ContextoModalSlide)
+    const {setTemModalSlide} = useContext(ContextoModalSlide)
 
     return (
         <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50 text-white">

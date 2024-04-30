@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState, Dispatch, SetStateAction } from "react";
+import { createContext, useState, Dispatch, SetStateAction } from "react";
 
 type GeralContextTypes = {   
     setTemAviso: Dispatch<SetStateAction<boolean>>,

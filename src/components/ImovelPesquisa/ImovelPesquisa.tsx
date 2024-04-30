@@ -9,7 +9,7 @@ type Props = {
     modal?: boolean
 }
 
-export default function ImovelPesquisa({imgs, id, modal}: Props){
+export default function ImovelPesquisa({imgs, id}: Props){
 
     const [idxImagem, setIdxImagem] = useState<number>(0)
     const [infoAtual, setInfoAtual] = useState<objImovel[]>([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1"}])

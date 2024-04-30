@@ -1,10 +1,4 @@
 import useMeasure from "react-use-measure"
-import img1 from "../../assets/img1.jpg"
-import img2 from "../../assets/img2.jpg"
-import img3 from "../../assets/img3.jpg"
-import img4 from "../../assets/img4.jpg"
-import img5 from "../../assets/img5.jpg"
-import img6 from "../../assets/img6.jpg"
 import { useMotionValue, animate, motion, AnimatePresence} from "framer-motion"
 import { useContext, useEffect, useState } from "react"
 import FotoSlide from "../FotoSlide/FotoSlide"
@@ -25,7 +19,6 @@ export default function SlideFinal(){
         fetch("http://localhost:3000/pegarFotosSlide").then(res => res.json()).then(data => {setArrayFotosTela([...data, ...data]); console.log(data)})
     }, [imoveisInfo])
 
-    const gapSlider: number = 10
 
     let [ref, {width}] = useMeasure()
 
@@ -35,11 +28,10 @@ export default function SlideFinal(){
     const [rerenderizar, setRerenderizar] = useState<boolean>(false)
 
     useEffect(() => {
-        let controls
         let posicaoFinal = -((width / 2))
 
         if(temQueTerminar){
-            controls = animate(xTranslation, [xTranslation.get(), posicaoFinal], {
+            animate(xTranslation, [xTranslation.get(), posicaoFinal], {
                 ease: "linear",
                 duration: duration * (1 - (xTranslation.get()/posicaoFinal)),
                 onComplete: () => {
@@ -48,7 +40,7 @@ export default function SlideFinal(){
                 }
             })
         }else{
-            controls = animate(xTranslation, [0, posicaoFinal], {
+            animate(xTranslation, [0, posicaoFinal], {
                 ease: "linear",
                 duration: duration,
                 repeat: Infinity,

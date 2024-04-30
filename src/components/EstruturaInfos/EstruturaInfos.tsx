@@ -12,7 +12,7 @@ type Props = {
     btPequeno?: boolean
 }
 
-export default function({numeroArea, numeroQuartos, numeroSuites, numeroVagas, numeroPreco, numeroCodigo, alturaFoto, temBotao, btPequeno}: Props){
+export default function({numeroArea, numeroQuartos, numeroSuites, numeroVagas, numeroPreco, numeroCodigo, alturaFoto, temBotao}: Props){
 
     let numPrecoTratado = numeroPreco
 
@@ -25,8 +25,8 @@ export default function({numeroArea, numeroQuartos, numeroSuites, numeroVagas, n
                 <div className="border-l-[1px] border-solid border-white h-full flex-1 flex justify-center items-center p-2">{numeroVagas} vagas</div>
             </div>
             <hr />
-            <div className="flex-4 flex py-2 flex-col md:flex-col">
-                <div className=" flex md:flex-col flex-row gap-4 justify-center md:gap-0 md:justify-start">
+            <div className="flex-4 flex py-2 flex-col">
+                <div className=" flex flex-row gap-4 justify-center">
                     <div>Venda: <span className="font-bold">R$ {numPrecoTratado}</span></div>
                     <div>Código: <span className="font-bold">{numeroCodigo}</span></div>
                 </div>

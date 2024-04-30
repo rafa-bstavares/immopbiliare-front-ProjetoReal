@@ -4,7 +4,6 @@ import PrimeiroCTA from './components/PrimeiroCTA/PrimeiroCTA'
 import { PesquisaProvider } from './Contexts/ContextoPesquisa/ContextoPesquisa'
 import { ElemCheckProvider } from './Contexts/ContextoElemCheck/ContextoElemCheck'
 import { ModalSlideProvider } from './Contexts/ContextoModalSlide/ContextoModalSlide'
-import QuemSomos from './components/QuemSomos/QuemSomos'
 
 function App() {
 

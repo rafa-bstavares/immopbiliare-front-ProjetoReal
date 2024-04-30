@@ -14,7 +14,6 @@ export default function Slide(){
     const [arrayFotosFinal, setArrayFotosFinal] = useState<string[]>([])
     const [mLeft, setMLeft] = useState("0vw")
     const [valorTransition, setValorTransition] = useState<string>("all 20s linear")
-    const [chegouFinal, setChegouFinal] = useState<boolean>(false)
 
 
 

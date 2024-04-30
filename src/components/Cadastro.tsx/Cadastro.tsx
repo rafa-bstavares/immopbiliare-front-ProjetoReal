@@ -19,7 +19,7 @@ export type objImoveisType = {
 
 export default function Cadastro(){
 
-    const [fotoEnviar, setFotoEnviar] = useState<File | string>("")
+    const [fotoEnviar] = useState<File | string>("")
     const [bairro, setBairro] = useState<string>("")
     const [tipoImovel, setTipoImovel]  = useState<string>("")
     const [metragem, setMetragem] = useState<string>("")
@@ -30,7 +30,6 @@ export default function Cadastro(){
     const [codigo, setCodigo] = useState<string>("")
     const [numeroFotos, setNumeroFotos] = useState<number>(1)
     const [arrNumFotos, setArrNumFotos] = useState<string[]>([])
-    const [ordinalidade, setOrdinalidade] = useState<string[]>(['primeira', 'segunda', 'terceira', 'quarta', 'quinta', 'sexta', 'sétima', 'oitava', 'nona', 'décima'])
     const [fotos, setFotos] = useState<File[] | []>([])
     const [idxUltimaClicada, setIdxUltimaClicada] = useState<number>() 
     const [novoBairro, setNovoBairro] = useState<string>("")
@@ -44,6 +43,8 @@ export default function Cadastro(){
     const [idItemDeletar, setIdItemDeletar] = useState<string>("")
 
     const [imoveisDeletar, setImoveisDeletar] = useState<objImoveisType[]>([])
+
+    const ordinalidade = ['primeira', 'segunda', 'terceira', 'quarta', 'quinta', 'sexta', 'sétima', 'oitava', 'nona', 'décima']
     
 
     const ref = useRef<HTMLInputElement>(null)
@@ -187,7 +188,7 @@ export default function Cadastro(){
                     </div>
                     <div className="flex flex-col relative">
                         <div className="grid grid-cols-3 gap-2">
-                            {arrNumFotos.map((item, index) =>  <div className="cursor-pointer p-1 rounded-md bg-white text-black text-sm flex justify-center items-center" onClick={(e) => {setIdxUltimaClicada(index); ref.current?.click()}}>{ordinalidade[index]} foto</div>)}
+                            {arrNumFotos.map((item, index) =>  <div key={item} className="cursor-pointer p-1 rounded-md bg-white text-black text-sm flex justify-center items-center" onClick={() => {setIdxUltimaClicada(index); ref.current?.click()}}>{ordinalidade[index]} foto</div>)}
                         </div>
                         <input type="file" ref={ref} onChange={(e) => {if(e.target.files){inputFn(e.target.files[0])}}}  className="opacity-0 absolute inset-0 -z-10"/> {/* e.target.files[0].name */}
                     </div>
