@@ -6,8 +6,9 @@ import img4 from "../../assets/img4.jpg"
 import img5 from "../../assets/img5.jpg"
 import img6 from "../../assets/img6.jpg"
 import { useMotionValue, animate, motion, AnimatePresence} from "framer-motion"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import FotoSlide from "../FotoSlide/FotoSlide"
+import { ContextoInfoImoveis } from "../../Contexts/ContextoInfoImoveis/ContextoInfoImoveis"
 
 export default function SlideFinal(){
 
@@ -15,11 +16,15 @@ export default function SlideFinal(){
     const slideRapido = 30
     const slideDevagar = 85
     const [duration, setDuration] = useState<number>(slideRapido)
+    const [arrayFotosTela, setArrayFotosTela] = useState<string[][]>([])
 
-    let larguraFotoSlide = "22"
+    const {imoveisInfo} = useContext(ContextoInfoImoveis)
 
-    let arrayFotos = [img1, img2, img3, img4, img5, img6] //Esse vai ser o array de fotos q vai vir da API
-    const arrayFotosTela = [...arrayFotos, ...arrayFotos]
+
+    useEffect(() => {
+        fetch("http://localhost:3000/pegarFotosSlide").then(res => res.json()).then(data => {setArrayFotosTela([...data, ...data]); console.log(data)})
+    }, [imoveisInfo])
+
     const gapSlider: number = 10
 
     let [ref, {width}] = useMeasure()
@@ -57,10 +62,10 @@ export default function SlideFinal(){
     }, [xTranslation, width, duration, rerenderizar])
 
     return (
-        <div className={`h-[300px] flex overflow-hidden relative `}>
+        <div className={`md:h-[300px] h-[200px] flex overflow-hidden relative `}>
             <AnimatePresence>
                 <motion.div ref={ref} onHoverStart={() => {setDuration(slideDevagar); setTemQueTerminar(true)}} onHoverEnd={() => {setDuration(slideRapido); setTemQueTerminar(true)}} style={{x: xTranslation}} className={`h-full flex gap-[10px]`}>
-                    {arrayFotosTela.map(item => <FotoSlide img={item} />)}
+                    {arrayFotosTela.map(item => <FotoSlide img={item[0]} id={item[1]} />)}
                 </motion.div>
                 <div className="absolute w-[5vw] h-full left-0 bg-gradient-to-r from-verdePrincipal to-transparent"></div>
                 <div className="absolute w-[5vw] h-full right-0 bg-gradient-to-l from-verdePrincipal to-transparent"></div>

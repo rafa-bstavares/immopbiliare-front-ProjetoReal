@@ -14,11 +14,11 @@ export default function Botao({temImg, btTexto, temaClaro, imgWpp, btPequeno}: P
 
     const iconeEscura = "#214E34"
     const iconeClaro = "#fff"
-    const dimensaoIcone = "30px"
+    const dimensaoIcone = "25px"
     
 
     return (
-        <div className={`cursor-pointer rounded-3xl py-2 px-8 flex items-center gap-5 ${temaClaro? "bg-white":"bg-verdePrincipal" } border-2 border-solid ${btPequeno ? "scale-75" : ""} ${temaClaro? "border-verdePrincipal":"border-white"}`}>
+        <a href={imgWpp ? "https://wa.me//5521987671995?text=Tenho%20interesse%20nos%20imóveis%20que%20vi%20no%20site" : "https://www.instagram.com/immobiliare.sp/"} target="_blank" className={`cursor-pointer rounded-3xl py-2 px-8 flex items-center gap-5 ${temaClaro? "bg-white":"bg-verdePrincipal" } border-2 border-solid ${btPequeno ? "scale-75" : ""} ${temaClaro? "border-verdePrincipal":"border-white"}`}>
             {temImg &&
                 imgWpp ? 
                 <IconeWpp color={temaClaro ? iconeEscura : iconeClaro} heightIcon={dimensaoIcone} widthIcon={dimensaoIcone} />
@@ -26,6 +26,6 @@ export default function Botao({temImg, btTexto, temaClaro, imgWpp, btPequeno}: P
                 <IconeInstagram color={temaClaro ? iconeEscura : iconeClaro} heightIcon={dimensaoIcone} widthIcon={dimensaoIcone} />
             }
             <div className={`font-[Antonio] text-center text-lg ${temaClaro? "text-verdePrincipal":"text-white"}`}>{btTexto.toUpperCase()}</div>
-        </div>
+        </a>
     )
 }

@@ -17,7 +17,7 @@ export default function({numeroArea, numeroQuartos, numeroSuites, numeroVagas, n
     let numPrecoTratado = numeroPreco
 
     return(
-        <div className={`w-larguraFotoSlide h-${alturaFoto? "alturaFotoSlide" : "auto"} p-2 flex flex-col justify-center items-center`}>
+        <div className={`md:w-larguraFotoSlide w-full md:h-${alturaFoto? "alturaFotoSlide" : "auto"} p-2 flex flex-col justify-center items-center`}>
             <div className="flex-6 flex py-2 w-full">
                 <div className="h-full flex-1 flex flex-col justify-center items-center p-2"><span className="font-bold">{numeroArea} m²</span>Área Útil</div>
                 <div className="border-l-[1px] border-solid border-white h-full flex-1 flex justify-center items-center p-2">{numeroQuartos} Quartos</div>
@@ -25,8 +25,8 @@ export default function({numeroArea, numeroQuartos, numeroSuites, numeroVagas, n
                 <div className="border-l-[1px] border-solid border-white h-full flex-1 flex justify-center items-center p-2">{numeroVagas} vagas</div>
             </div>
             <hr />
-            <div className="flex-4 flex py-2">
-                <div className=" flex flex-col">
+            <div className="flex-4 flex py-2 flex-col md:flex-col">
+                <div className=" flex md:flex-col flex-row gap-4 justify-center md:gap-0 md:justify-start">
                     <div>Venda: <span className="font-bold">R$ {numPrecoTratado}</span></div>
                     <div>Código: <span className="font-bold">{numeroCodigo}</span></div>
                 </div>

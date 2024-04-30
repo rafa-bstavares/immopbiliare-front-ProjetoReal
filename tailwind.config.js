@@ -13,13 +13,17 @@ export default {
       },
       padding:{
         xGeralPc: "100px",
-        yGeralPc: "60px"
+        xGeralMobile: "20px",
+        yGeralPc: "60px",
+        yGeralMobile: "12px"
       },
       width: {
-        larguraFotoSlide: "22vw"
+        larguraFotoSlide: "22vw",
+        larguraFotoSlideMobile: "80vw"
       },
       height: {
-        alturaFotoSlide: "300px"
+        alturaFotoSlide: "300px",
+        alturaFotoSlideMobile: "200px"
       }
     },
   },
