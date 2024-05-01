@@ -15,7 +15,7 @@ export default function ModalCerteza({codigo, id, setTemModalCerteza, setImoveis
 
 
     function deletarItem(){
-        fetch("http://localhost:3000/deletarItem", {
+        fetch(process.env.API_URL + "/deletarItem", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +29,7 @@ export default function ModalCerteza({codigo, id, setTemModalCerteza, setImoveis
             if(data[1]){
                 setTextoAviso(data[1])
             }
-            fetch("http://localhost:3000/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}) 
+            fetch(process.env.API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}) 
         })
     }
 

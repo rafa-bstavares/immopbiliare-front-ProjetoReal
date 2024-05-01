@@ -80,7 +80,7 @@ export default function Cadastro(){
     
             
     
-            fetch("http://localhost:3000/cadastrarNovoImovel", {
+            fetch(process.env.API_URL + "/cadastrarNovoImovel", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
@@ -126,7 +126,7 @@ export default function Cadastro(){
 
     function novoBairroFn(){
         if(novoBairro == novoBairro2  && novoBairro){
-            fetch("http://localhost:3000/novoBairro", {
+            fetch(process.env.API_URL + "/novoBairro", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -149,7 +149,7 @@ export default function Cadastro(){
 
     function novoTipoFn(){
         if(novoTipo == novoTipo2  && novoTipo){
-            fetch("http://localhost:3000/novoTipo", {
+            fetch(process.env.API_URL + "/novoTipo", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -171,7 +171,7 @@ export default function Cadastro(){
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao tentar pegar as informações, por favor cheque sua internet e recarregue a página. Erro: ${err}`)})
+        fetch(process.env.API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao tentar pegar as informações, por favor cheque sua internet e recarregue a página. Erro: ${err}`)})
     }, [])
 
 

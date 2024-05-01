@@ -3,7 +3,7 @@ import { objImovel } from "../ContextoInfoImoveis/ContextoInfoImoveis"
 import { imoveisPesquisaType } from "../../components/PaginaPrincipal/PaginaPrincipal"
 
 export function PegarBairros(setBairros: Dispatch<SetStateAction<string[]>>, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
-    fetch("http://localhost:3000/pegarBairros").then(res => res.json()).then(data => {
+    fetch( process.env.API_URL + "/pegarBairros").then(res => res.json()).then(data => {
         if(data.length > 0){
             let arrNovosBairros = ["selecione um bairro"]
             data.forEach((item: {bairro: string}) => {
@@ -18,7 +18,7 @@ export function PegarBairros(setBairros: Dispatch<SetStateAction<string[]>>, set
 }
 
 export function pegarTiposImoveis(setTiposImoveis: Dispatch<SetStateAction<string[]>>, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
-    fetch("http://localhost:3000/pegarTipos").then(res => res.json()).then(data => {
+    fetch(process.env.API_URL + "/pegarTipos").then(res => res.json()).then(data => {
         if(data.length > 0){
             let arrNovosTipos = ["selecione um tipo de imóvel"]
             data.forEach((item: {tipoimovel: string}) => {
@@ -33,7 +33,7 @@ export function pegarTiposImoveis(setTiposImoveis: Dispatch<SetStateAction<strin
 }
 
 export function pegarInfosImoveis(setInfoImoveis: Dispatch<SetStateAction<objImovel[]>>, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
-    fetch("http://localhost:3000/infoImoveis").then(res => res.json()).then(data => {
+    fetch(process.env.API_URL + "/infoImoveis").then(res => res.json()).then(data => {
         if(data[0] == "sucesso"){
             setInfoImoveis(data[1])
         }else{
@@ -46,7 +46,7 @@ export function pegarInfosImoveis(setInfoImoveis: Dispatch<SetStateAction<objImo
 export function pesquisarImoveis(setArrayImoveisPesquisa: Dispatch<SetStateAction<imoveisPesquisaType[]>>, bairrosPesquisa: string[], tiposPesquisa: string[], setPesquisa: Dispatch<SetStateAction<boolean>>, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
     console.log("acionou a função de pesquisa")
 
-    fetch("http://localhost:3000/pesquisaImoveis", {
+    fetch(process.env.API_URL + "/pesquisaImoveis", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -69,7 +69,7 @@ export function pesquisarImoveis(setArrayImoveisPesquisa: Dispatch<SetStateActio
 export function pesquisarImoveisId(setArrayImovel: Dispatch<SetStateAction<imoveisPesquisaType[]>>, id: string, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
 
 
-    fetch("http://localhost:3000/pesquisaImoveisId", {
+    fetch(process.env.API_URL + "/pesquisaImoveisId", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({

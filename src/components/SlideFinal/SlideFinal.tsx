@@ -16,7 +16,7 @@ export default function SlideFinal(){
 
 
     useEffect(() => {
-        fetch("http://localhost:3000/pegarFotosSlide").then(res => res.json()).then(data => {setArrayFotosTela([...data, ...data]); console.log(data)})
+        fetch( process.env.API_URL + "/pegarFotosSlide").then(res => res.json()).then(data => {setArrayFotosTela([...data, ...data]); console.log(data)})
     }, [imoveisInfo])
 
 
