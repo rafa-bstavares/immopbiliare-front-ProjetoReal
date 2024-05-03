@@ -195,9 +195,6 @@ export default function Cadastro(){
         fetch(import.meta.env.VITE_API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao tentar pegar as informações, por favor cheque sua internet e recarregue a página. Erro: ${err}`)})
     }, [])
 
-    function cadastroBt(){
-        fetch("http://localhost:8800/cadastro").then(res => res.json()).then(data => console.log(data))
-    }
 
 
     return (
