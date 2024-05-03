@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import FotoSlide from "../FotoSlide/FotoSlide"
 import { ContextoInfoImoveis } from "../../Contexts/ContextoInfoImoveis/ContextoInfoImoveis"
 
+
 export default function SlideFinal(){
 
 
@@ -16,7 +17,7 @@ export default function SlideFinal(){
 
 
     useEffect(() => {
-        fetch( process.env.API_URL + "/pegarFotosSlide").then(res => res.json()).then(data => {setArrayFotosTela([...data, ...data]); console.log(data)})
+        fetch( import.meta.env.VITE_API_URL + "/pegarFotosSlide").then(res => res.json()).then(data => {setArrayFotosTela([...data, ...data]); console.log(data)})
     }, [imoveisInfo])
 
 

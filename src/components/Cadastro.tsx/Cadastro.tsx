@@ -41,6 +41,9 @@ export default function Cadastro(){
     const [temModalCerteza, setTemModalCerteza] = useState<boolean>(false)
     const [codigoItemDeletar, setCodigoItemDeletar] = useState<string>("")
     const [idItemDeletar, setIdItemDeletar] = useState<string>("")
+    const [logged, setLogged] = useState<boolean>(false)
+    const [emailLogin, setEmailLogin] = useState<string>("")
+    const [senhaLogin, setSenhaLogin] = useState<string>("")
 
     const [imoveisDeletar, setImoveisDeletar] = useState<objImoveisType[]>([])
 
@@ -56,6 +59,24 @@ export default function Cadastro(){
         pegarTiposImoveis(setTiposImoveis, setTemAviso, setTextoAviso)
     }, [])
 
+
+    function clickBtFn(){
+        fetch(import.meta.env.VITE_API_URL + "/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                emailLogin,
+                senhaLogin
+            })
+        }).then(res => res.json()).then(data => {
+            if(data[0] == "sucesso"){
+                setLogged(true)
+            }else{
+                setTemAviso(true)
+                setTextoAviso("Ocorreu algum erro, tente novamente")
+            }
+        }).catch(() => {setTemAviso(true); setTextoAviso("Ocorreu algum erro, tente novamente"); console.log("ta caindo no catch")})
+    }
 
     function cadastrarNovoImovel(){
         if(bairro && tipoImovel && metragem && numQuartos && numSuites && numVagas && preco && codigo){
@@ -80,7 +101,7 @@ export default function Cadastro(){
     
             
     
-            fetch(process.env.API_URL + "/cadastrarNovoImovel", {
+            fetch(import.meta.env.VITE_API_URL + "/cadastrarNovoImovel", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
@@ -126,7 +147,7 @@ export default function Cadastro(){
 
     function novoBairroFn(){
         if(novoBairro == novoBairro2  && novoBairro){
-            fetch(process.env.API_URL + "/novoBairro", {
+            fetch(import.meta.env.VITE_API_URL + "/novoBairro", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -149,7 +170,7 @@ export default function Cadastro(){
 
     function novoTipoFn(){
         if(novoTipo == novoTipo2  && novoTipo){
-            fetch(process.env.API_URL + "/novoTipo", {
+            fetch(import.meta.env.VITE_API_URL + "/novoTipo", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
@@ -171,96 +192,124 @@ export default function Cadastro(){
     }
 
     useEffect(() => {
-        fetch(process.env.API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao tentar pegar as informações, por favor cheque sua internet e recarregue a página. Erro: ${err}`)})
+        fetch(import.meta.env.VITE_API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao tentar pegar as informações, por favor cheque sua internet e recarregue a página. Erro: ${err}`)})
     }, [])
+
+    function cadastroBt(){
+        fetch("http://localhost:8800/cadastro").then(res => res.json()).then(data => console.log(data))
+    }
 
 
     return (
         <div className="bg-verdePrincipal text-white relative overflow-x-hidden p-10">
-            <div className="flex items-center justify-evenly min-h-screen bg-verdePrincipal text-white overflow-x-hidden">
-                <div className="flex flex-col items-start gap-5">
-                    <div className="text-3xl ">Cadastrar novo imóvel</div>
-                    <div className="flex flex-col">
-                        <label htmlFor="selectNumFotos" className="text-lg">Numero de fotos</label>
-                        <select onChange={(e) => {setNumeroFotos(Number(e.target.value))}} name="selectNumFotos" id="selectNumFotos" className="border-2 border-solid border-black text-black">
-                            {ordinalidade.map((item, index) => <option value={index + 1} key={item}>{index + 1}</option>)}
-                        </select>
-                    </div>
-                    <div className="flex flex-col relative">
-                        <div className="grid grid-cols-3 gap-2">
-                            {arrNumFotos.map((item, index) =>  <div key={item} className="cursor-pointer p-1 rounded-md bg-white text-black text-sm flex justify-center items-center" onClick={() => {setIdxUltimaClicada(index); ref.current?.click()}}>{ordinalidade[index]} foto</div>)}
-                        </div>
-                        <input type="file" ref={ref} onChange={(e) => {if(e.target.files){inputFn(e.target.files[0])}}}  className="opacity-0 absolute inset-0 -z-10"/> {/* e.target.files[0].name */}
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="selectBairros" className="text-lg">Selecione um bairro</label>
-                        <select onChange={(e) => setBairro(e.target.value)} name="selectBairros" id="selectBairros" className="border-2 border-solid border-black text-black">
-                            {bairros.map((item, index) => <option disabled={index == 0} selected={index == 0} value={item}>{item}</option>)}
-                        </select>
-                    </div>
-                    <div className="flex flex-col">
-                        <label htmlFor="selectTipo" className="text-lg">Selecione o tipo de imóvel</label>
-                        <select onChange={(e) => setTipoImovel(e.target.value)} name="selectTipo" id="selectTipo" className="border-2 border-solid border-black text-black">
-                            {tiposImoveis.map((item, index) => <option disabled={index == 0} selected={index == 0} value={item}>{item}</option>)}
-                        </select>
-                    </div>
-                    <div className="flex flex-col items-start">
-                        <label htmlFor="numeroMetragem">Metragem <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, caso necessário</div></label>
-                        <input onChange={(e) => setMetragem(e.target.value)} type="number" id="numeroMetragem" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                    </div>
-                    <div className="flex flex-col items-start">
-                        <label htmlFor="numeroQuartos">Número de quartos <br/><div className="text-sm">*apenas números</div></label>
-                        <input onChange={(e) => setNumQuartos(e.target.value)} type="number" id="numeroQuartos" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                    </div>
-                    <div className="flex flex-col items-start">
-                        <label htmlFor="numeroSuites">Número de suítes<br/><div className="text-sm">*apenas números</div></label>
-                        <input onChange={(e) => setNumSuites(e.target.value)} type="number" id="numeroSuites" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                    </div>
-                    <div className="flex flex-col items-start">
-                        <label htmlFor="numeroVagas">Número de vagas<br/><div className="text-sm">*apenas números</div></label>
-                        <input onChange={(e) => setNumVagas(e.target.value)} type="number" id="numeroVagas" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                    </div>
-                    <div className="flex flex-col items-start">
-                        <label htmlFor="numeroPreco">Preço <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, apenas para números quebrados , numeros inteiros colocar sem vírgula e ponto</div></label>
-                        <input onChange={(e) => setPreco(e.target.value)} type="number" id="numeroPreco" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                    </div>
-                    <div className="flex flex-col items-start">
-                        <label htmlFor="numeroCódigo">Código<br/><div className="text-sm">*apenas números</div></label>
-                        <input onChange={(e) => setCodigo(e.target.value)} type="number" id="numeroCódigo" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                    </div>
-                    <button className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white" onClick={cadastrarNovoImovel}>Cadastrar novo imóvel</button>
-                </div>
-                <div className="flex flex-col items-start gap-7">
-                    <div className="flex flex-col items-start gap-4">
-                        <div className="text-3xl ">Cadastrar Bairro inédito</div>
-                        <div className="flex flex-col gap-2">
-                            <input onChange={(e) => {setNovoBairro(e.target.value)}} value={novoBairro} type="text" placeholder="Nome do novo bairro" className="border-2 border-black border-solid p-2 w-64 text-black"/>
-                            <input onChange={(e) => {setNovoBairro2(e.target.value)}} value={novoBairro2} type="text" placeholder="repita o nome do novo bairro" className="border-2 border-black border-solid p-2 w-64 text-black"/>
-                            <button onClick={novoBairroFn} className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white">Cadastrar novo bairro</button>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-start gap-4">
-                        <div className="text-3xl ">Cadastrar Tipo de imóvel inédito</div>
-                        <div className="flex flex-col gap-2">
-                            <input onChange={(e) => setNovoTipo(e.target.value)} value={novoTipo} type="text" placeholder="Nome do novo tipo" className="border-2 border-black border-solid p-2 w-64 text-black"/>
-                            <input onChange={(e) => setNovoTipo2(e.target.value)} value={novoTipo2} type="text" placeholder="repita o nome do novo tipo" className="border-2 border-black border-solid p-2 w-64 text-black"/>
-                            <button onClick={novoTipoFn} className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white">Cadastrar novo tipo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-col gap-16 items-center m-10">
-                <div className="text-3xl">Deletar Imóveis</div>
-                {imoveisDeletar.map(item => <ItemDeletar setCodigoItemDeletar={setCodigoItemDeletar} setIdItemDeletar={setIdItemDeletar} setTemModalCerteza={setTemModalCerteza} item={item} />)}
-            </div>
             {
-                temModalCerteza && 
-                <ModalCerteza setImoveisDeletar={setImoveisDeletar} setTemModalCerteza={setTemModalCerteza} codigo={codigoItemDeletar} id={idItemDeletar}/>
-            }
-            {
-                temAviso &&
-                <TelaAviso texto={textoAviso} temAvisoFn={setTemAviso}/>
+                logged ?
+                <>
+                    <div className="flex items-center justify-evenly min-h-screen bg-verdePrincipal text-white overflow-x-hidden">
+                        <div className="flex flex-col items-start gap-5">
+                            <div className="text-3xl ">Cadastrar novo imóvel</div>
+                            <div className="flex flex-col">
+                                <label htmlFor="selectNumFotos" className="text-lg">Numero de fotos</label>
+                                <select onChange={(e) => {setNumeroFotos(Number(e.target.value))}} name="selectNumFotos" id="selectNumFotos" className="border-2 border-solid border-black text-black">
+                                    {ordinalidade.map((item, index) => <option value={index + 1} key={item}>{index + 1}</option>)}
+                                </select>
+                            </div>
+                            <div className="flex flex-col relative">
+                                <div className="grid grid-cols-3 gap-2">
+                                    {arrNumFotos.map((item, index) =>  <div key={item} className="cursor-pointer p-1 rounded-md bg-white text-black text-sm flex justify-center items-center" onClick={() => {setIdxUltimaClicada(index); ref.current?.click()}}>{ordinalidade[index]} foto</div>)}
+                                </div>
+                                <input type="file" ref={ref} onChange={(e) => {if(e.target.files){inputFn(e.target.files[0])}}}  className="opacity-0 absolute inset-0 -z-10"/> {/* e.target.files[0].name */}
+                            </div>
+                            <div className="flex flex-col">
+                                <label htmlFor="selectBairros" className="text-lg">Selecione um bairro</label>
+                                <select onChange={(e) => setBairro(e.target.value)} name="selectBairros" id="selectBairros" className="border-2 border-solid border-black text-black">
+                                    {bairros.map((item, index) => <option disabled={index == 0} selected={index == 0} value={item}>{item}</option>)}
+                                </select>
+                            </div>
+                            <div className="flex flex-col">
+                                <label htmlFor="selectTipo" className="text-lg">Selecione o tipo de imóvel</label>
+                                <select onChange={(e) => setTipoImovel(e.target.value)} name="selectTipo" id="selectTipo" className="border-2 border-solid border-black text-black">
+                                    {tiposImoveis.map((item, index) => <option disabled={index == 0} selected={index == 0} value={item}>{item}</option>)}
+                                </select>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <label htmlFor="numeroMetragem">Metragem <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, caso necessário</div></label>
+                                <input onChange={(e) => setMetragem(e.target.value)} type="number" id="numeroMetragem" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <label htmlFor="numeroQuartos">Número de quartos <br/><div className="text-sm">*apenas números</div></label>
+                                <input onChange={(e) => setNumQuartos(e.target.value)} type="number" id="numeroQuartos" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <label htmlFor="numeroSuites">Número de suítes<br/><div className="text-sm">*apenas números</div></label>
+                                <input onChange={(e) => setNumSuites(e.target.value)} type="number" id="numeroSuites" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <label htmlFor="numeroVagas">Número de vagas<br/><div className="text-sm">*apenas números</div></label>
+                                <input onChange={(e) => setNumVagas(e.target.value)} type="number" id="numeroVagas" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <label htmlFor="numeroPreco">Preço <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, apenas para números quebrados , numeros inteiros colocar sem vírgula e ponto</div></label>
+                                <input onChange={(e) => setPreco(e.target.value)} type="number" id="numeroPreco" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <label htmlFor="numeroCódigo">Código<br/><div className="text-sm">*apenas números</div></label>
+                                <input onChange={(e) => setCodigo(e.target.value)} type="number" id="numeroCódigo" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            </div>
+                            <button className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white" onClick={cadastrarNovoImovel}>Cadastrar novo imóvel</button>
+                        </div>
+                        <div className="flex flex-col items-start gap-7">
+                            <div className="flex flex-col items-start gap-4">
+                                <div className="text-3xl ">Cadastrar Bairro inédito</div>
+                                <div className="flex flex-col gap-2">
+                                    <input onChange={(e) => {setNovoBairro(e.target.value)}} value={novoBairro} type="text" placeholder="Nome do novo bairro" className="border-2 border-black border-solid p-2 w-64 text-black"/>
+                                    <input onChange={(e) => {setNovoBairro2(e.target.value)}} value={novoBairro2} type="text" placeholder="repita o nome do novo bairro" className="border-2 border-black border-solid p-2 w-64 text-black"/>
+                                    <button onClick={novoBairroFn} className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white">Cadastrar novo bairro</button>
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-start gap-4">
+                                <div className="text-3xl ">Cadastrar Tipo de imóvel inédito</div>
+                                <div className="flex flex-col gap-2">
+                                    <input onChange={(e) => setNovoTipo(e.target.value)} value={novoTipo} type="text" placeholder="Nome do novo tipo" className="border-2 border-black border-solid p-2 w-64 text-black"/>
+                                    <input onChange={(e) => setNovoTipo2(e.target.value)} value={novoTipo2} type="text" placeholder="repita o nome do novo tipo" className="border-2 border-black border-solid p-2 w-64 text-black"/>
+                                    <button onClick={novoTipoFn} className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white">Cadastrar novo tipo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-16 items-center m-10">
+                        <div className="text-3xl">Deletar Imóveis</div>
+                        {imoveisDeletar.map(item => <ItemDeletar setCodigoItemDeletar={setCodigoItemDeletar} setIdItemDeletar={setIdItemDeletar} setTemModalCerteza={setTemModalCerteza} item={item} />)}
+                    </div>
+                    {
+                        temModalCerteza && 
+                        <ModalCerteza setImoveisDeletar={setImoveisDeletar} setTemModalCerteza={setTemModalCerteza} codigo={codigoItemDeletar} id={idItemDeletar}/>
+                    }
+                    {
+                        temAviso &&
+                        <TelaAviso texto={textoAviso} temAvisoFn={setTemAviso}/>
+                    }
+                </>
+                :
+                
+                <div className="min-h-screen bg-verdePrincipal flex justify-center items-center relative">
+                    <div className="flex flex-col gap-4 w-full items-center">
+                        <input onChange={(e) => setEmailLogin(e.target.value)} className="p-2 rounded-md w-4/5 md:w-1/2 text-black" placeholder="email" type="text" name="" id="" />
+                        <input onChange={(e) => setSenhaLogin(e.target.value)} className="p-2 rounded-md w-4/5 md:w-1/2 text-black" placeholder="senha" type="password" name="" id="" />
+                        <button onClick={clickBtFn} className="p-2 bg-laranjaPrincipal rounded-md w-4/5 md:w-1/2">Entrar</button>
+                    </div>
+                    {
+                        temModalCerteza && 
+                        <ModalCerteza setImoveisDeletar={setImoveisDeletar} setTemModalCerteza={setTemModalCerteza} codigo={codigoItemDeletar} id={idItemDeletar}/>
+                    }
+                    {
+                        temAviso &&
+                        <TelaAviso texto={textoAviso} temAvisoFn={setTemAviso}/>
+                    }
+                </div>
+                    
             }
         </div>
+        
     )
 }

@@ -16,6 +16,7 @@ import { ContextoPesquisa } from "../../Contexts/ContextoPesquisa/ContextoPesqui
 import { ContextoElemCheck } from "../../Contexts/ContextoElemCheck/ContextoElemCheck"
 import { ContextoModalSlide } from "../../Contexts/ContextoModalSlide/ContextoModalSlide"
 
+
 export type imoveisPesquisaType = {
     id: string,
     imagens: string[]

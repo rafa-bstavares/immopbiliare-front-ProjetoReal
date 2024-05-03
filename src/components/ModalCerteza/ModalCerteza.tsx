@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useContext } from "react"
 import { GeralContext } from "../../Contexts/ContextGeral/ContextGeral"
 import { objImoveisType } from "../Cadastro.tsx/Cadastro"
 
+
 type Props = {
     codigo: string,
     id: string,
@@ -15,7 +16,7 @@ export default function ModalCerteza({codigo, id, setTemModalCerteza, setImoveis
 
 
     function deletarItem(){
-        fetch(process.env.API_URL + "/deletarItem", {
+        fetch(import.meta.env.VITE_API_URL + "/deletarItem", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -29,7 +30,7 @@ export default function ModalCerteza({codigo, id, setTemModalCerteza, setImoveis
             if(data[1]){
                 setTextoAviso(data[1])
             }
-            fetch(process.env.API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}) 
+            fetch(import.meta.env.VITE_API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}) 
         })
     }
 
