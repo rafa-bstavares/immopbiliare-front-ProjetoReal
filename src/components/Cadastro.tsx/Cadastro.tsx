@@ -23,6 +23,7 @@ export default function Cadastro(){
     const [bairro, setBairro] = useState<string>("")
     const [tipoImovel, setTipoImovel]  = useState<string>("")
     const [metragem, setMetragem] = useState<string>("")
+    const [metragemFinal, setMetragemFinal] = useState<string>("")
     const [numQuartos, setNumQuartos] = useState<string>("")
     const [numSuites, setNumSuites] = useState<string>("")
     const [numVagas, setNumVagas] = useState<string>("")
@@ -47,7 +48,7 @@ export default function Cadastro(){
 
     const [imoveisDeletar, setImoveisDeletar] = useState<objImoveisType[]>([])
 
-    const ordinalidade = ['primeira', 'segunda', 'terceira', 'quarta', 'quinta', 'sexta', 'sétima', 'oitava', 'nona', 'décima']
+    const ordinalidade = ['primeira', 'segunda', 'terceira', 'quarta', 'quinta', 'sexta', 'sétima', 'oitava', 'nona', 'décima', 'décima primeira', 'décima segunda', 'décima terceira', 'décima quarta', 'décima quinta']
     
 
     const ref = useRef<HTMLInputElement>(null)
@@ -90,6 +91,7 @@ export default function Cadastro(){
             formData.append("bairro", bairro)
             formData.append("tipoImovel", tipoImovel)
             formData.append("metragem", metragem)
+            formData.append("metragemFinal", metragemFinal)
             formData.append("numQuartos", numQuartos)
             formData.append("numSuites", numSuites)
             formData.append("numVagas", numVagas)
@@ -229,12 +231,13 @@ export default function Cadastro(){
                                     {tiposImoveis.map((item, index) => <option disabled={index == 0} selected={index == 0} value={item}>{item}</option>)}
                                 </select>
                             </div>
-                            <div className="flex flex-col items-start">
+                            <div className="flex flex-col items-start gap-1">
                                 <label htmlFor="numeroMetragem">Metragem <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, caso necessário</div></label>
-                                <input onChange={(e) => setMetragem(e.target.value)} type="number" id="numeroMetragem" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                                <input placeholder="a partir de..." onChange={(e) => setMetragem(e.target.value)} type="number" id="numeroMetragem" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                                <input placeholder="até..." onChange={(e) => setMetragemFinal(e.target.value)} type="number" id="numeroMetragemFinal" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
                             <div className="flex flex-col items-start">
-                                <label htmlFor="numeroQuartos">Número de quartos <br/><div className="text-sm">*apenas números</div></label>
+                                <label htmlFor="numeroQuartos">Número de dormitórios<br/><div className="text-sm">*apenas números</div></label>
                                 <input onChange={(e) => setNumQuartos(e.target.value)} type="number" id="numeroQuartos" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
                             <div className="flex flex-col items-start">
@@ -250,8 +253,8 @@ export default function Cadastro(){
                                 <input onChange={(e) => setPreco(e.target.value)} type="number" id="numeroPreco" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
                             <div className="flex flex-col items-start">
-                                <label htmlFor="numeroCódigo">Código<br/><div className="text-sm">*apenas números</div></label>
-                                <input onChange={(e) => setCodigo(e.target.value)} type="number" id="numeroCódigo" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                                <label htmlFor="numeroCódigo">Código<br/></label>
+                                <input onChange={(e) => setCodigo(e.target.value)} type="text" id="numeroCódigo" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
                             <button className="p-2 bg-verdeMaisEscuro font-bold border-2 border-solid border-white text-white" onClick={cadastrarNovoImovel}>Cadastrar novo imóvel</button>
                         </div>

@@ -12,7 +12,7 @@ type Props = {
 export default function ImovelPesquisa({imgs, id}: Props){
 
     const [idxImagem, setIdxImagem] = useState<number>(0)
-    const [infoAtual, setInfoAtual] = useState<objImovel[]>([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1"}])
+    const [infoAtual, setInfoAtual] = useState<objImovel[]>([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1", metragemfinal: "1"}])
     
     const {imoveisInfo} = useContext(ContextoInfoImoveis)
 
@@ -24,10 +24,10 @@ export default function ImovelPesquisa({imgs, id}: Props){
                 if(novoInfoAtual){
                     setInfoAtual(novoInfoAtual)
                 }else{
-                    setInfoAtual([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1"}] )
+                    setInfoAtual([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1", metragemfinal: "1"}] )
                 }
             }else{
-                setInfoAtual([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1"}] )
+                setInfoAtual([{bairro: "1", codigo: "1", id: "8", metragem: "1", numquartos: "1", numsuites: "1", numvagas: "1", preco: "1", tipoimovel: "1", metragemfinal: "1"}] )
             }
         
     }, [imoveisInfo])
@@ -55,7 +55,7 @@ console.log(infoAtual)
                 <div onClick={setaTras} className="absolute w-8 h-8 p-[10px] left-0 top-1/2 z-10 bg-verdeMaisEscuro translate-x-[-50%] translate-y-[-50%] cursor-pointer rotate-90 rounded-full flex justify-center items-center"><img className="w-full h-full" src={seta} alt="seta esquerda slide" /></div>
                 <div onClick={setaFrente} className="absolute w-8 h-8 p-[10px] right-0 top-1/2 z-10 bg-verdeMaisEscuro translate-x-1/2 translate-y-[-50%] cursor-pointer -rotate-90 rounded-full flex justify-center items-center"><img className="w-full h-full" src={seta} alt="seta seta direita slide" /></div>
             </div>
-            <EstruturaInfos numeroArea={Number(infoAtual[0].metragem) ? Number(infoAtual[0].metragem) : 0} numeroCodigo={Number(infoAtual[0].codigo)} numeroPreco={Number(infoAtual[0].preco)} numeroQuartos={Number(infoAtual[0].numquartos)} numeroSuites={Number(infoAtual[0].numsuites)} numeroVagas={Number(infoAtual[0].numvagas)} alturaFoto={true} temBotao={true}/>
+            <EstruturaInfos numeroAreaFinal={Number(infoAtual[0].metragemfinal) ? Number(infoAtual[0].metragemfinal) : 0} numeroArea={Number(infoAtual[0].metragem) ? Number(infoAtual[0].metragem) : 0} numeroCodigo={infoAtual[0].codigo} numeroPreco={Number(infoAtual[0].preco)} numeroQuartos={Number(infoAtual[0].numquartos)} numeroSuites={Number(infoAtual[0].numsuites)} numeroVagas={Number(infoAtual[0].numvagas)} alturaFoto={true} temBotao={true}/>
         </div>
     )
 }

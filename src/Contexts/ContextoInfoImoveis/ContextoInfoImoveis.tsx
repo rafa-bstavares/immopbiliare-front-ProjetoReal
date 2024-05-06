@@ -5,6 +5,7 @@ export type objImovel = {
     bairro: string,
     tipoimovel: string,
     metragem: string,
+    metragemfinal: string,
     numquartos: string,
     numsuites: string,
     numvagas: string,
