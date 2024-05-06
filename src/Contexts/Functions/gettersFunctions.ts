@@ -33,7 +33,8 @@ export function pegarTiposImoveis(setTiposImoveis: Dispatch<SetStateAction<strin
     }).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao buscar os tipos de imóveis no banco de dados, por favor cheque sua internet. Erro: ${err}`)})
 }
 
-export function pegarInfosImoveis(setInfoImoveis: Dispatch<SetStateAction<objImovel[]>>, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
+export function pegarInfosImoveis(
+    setInfoImoveis: Dispatch<SetStateAction<objImovel[]>>, setTemAviso: Dispatch<SetStateAction<boolean>>, setTextoAviso: Dispatch<SetStateAction<string>>){
     fetch(import.meta.env.VITE_API_URL + "/infoImoveis").then(res => res.json()).then(data => {
         if(data[0] == "sucesso"){
             setInfoImoveis(data[1])
