@@ -215,7 +215,8 @@ export default function Cadastro(){
                             </div>
                             <div className="flex flex-col relative">
                                 <div className="grid grid-cols-3 gap-2">
-                                    {arrNumFotos.map((item, index) =>  <div key={item} className="cursor-pointer p-1 rounded-md bg-white text-black text-sm flex justify-center items-center" onClick={() => {setIdxUltimaClicada(index); ref.current?.click()}}>{ordinalidade[index]} foto</div>)}
+                                    {arrNumFotos.map((item, index) =>  <div key={item} className={`cursor-pointer p-1 rounded-md bg-${fotos[index] ? "verdeMaisEscuro" : "white"} text-${fotos[index] ? "white" : "black"} text-sm flex justify-center items-center`} onClick={() => {setIdxUltimaClicada(index); ref.current?.click()}}>
+                                    {fotos[index] ? "foto selecionada" : ordinalidade[index] + " foto"}</div>)}
                                 </div>
                                 <input type="file" ref={ref} onChange={(e) => {if(e.target.files){inputFn(e.target.files[0])}}}  className="opacity-0 absolute inset-0 -z-10"/> {/* e.target.files[0].name */}
                             </div>

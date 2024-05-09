@@ -18,7 +18,7 @@ export default function Botao({temImg, btTexto, temaClaro, imgWpp, btPequeno}: P
     
 
     return (
-        <a href={imgWpp ? "https://wa.me//5521987671995?text=Tenho%20interesse%20nos%20imóveis%20que%20vi%20no%20site" : "https://www.instagram.com/immobiliare.sp/"} target="_blank" className={`cursor-pointer rounded-3xl py-2 px-8 flex items-center gap-5 ${temaClaro? "bg-white":"bg-verdePrincipal" } border-2 border-solid ${btPequeno ? "scale-75" : ""} ${temaClaro? "border-verdePrincipal":"border-white"}`}>
+        <a href={imgWpp ? "https://wa.me//5511996794402?text=Tenho%20interesse%20nos%20imóveis%20que%20vi%20no%20site" : "https://www.instagram.com/immobiliare.sp/"} target="_blank" className={`cursor-pointer rounded-3xl py-2 px-8 flex items-center gap-5 ${temaClaro? "bg-white":"bg-verdePrincipal" } border-2 border-solid ${btPequeno ? "scale-75" : ""} ${temaClaro? "border-verdePrincipal":"border-white"}`}>
             {temImg &&
                 imgWpp ? 
                 <IconeWpp color={temaClaro ? iconeEscura : iconeClaro} heightIcon={dimensaoIcone} widthIcon={dimensaoIcone} />
