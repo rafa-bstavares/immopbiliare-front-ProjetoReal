@@ -204,7 +204,7 @@ export default function Cadastro(){
             {
                 logged ?
                 <>
-                    <div className="flex items-center justify-evenly min-h-screen bg-verdePrincipal text-white overflow-x-hidden">
+                    <div className="flex flex-col md:flex-row gap-12 md:gap-0 items-center justify-evenly min-h-screen bg-verdePrincipal text-white overflow-x-hidden">
                         <div className="flex flex-col items-start gap-5">
                             <div className="text-3xl ">Cadastrar novo imóvel</div>
                             <div className="flex flex-col">

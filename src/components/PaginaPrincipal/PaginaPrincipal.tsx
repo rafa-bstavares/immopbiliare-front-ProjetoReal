@@ -86,7 +86,7 @@ export default function PaginaPrincipal(){
             {/* MENU */}
             <div className="md:px-xGeralPc px-xGeralMobile p-yGeralMobile md:py-0 h-[80px] flex justify-between items-center md:items-stretch">
                 <div className="flex flex-col md:flex-row items-center h-full md:gap-4">
-                    <div className="text-2xl text-laranjaPrincipal font-[Montserrat]">immobiliare</div>
+                    <div className="text-2xl md:text-4xl text-laranjaPrincipal font-[Montserrat]">immobiliare</div>
                     <img src={logo} alt="logotipo-immobiliare" className="md:w-16 md:h-16 w-10 h-10 -order-1 md:order-1"/>
                 </div>
                 {/*
