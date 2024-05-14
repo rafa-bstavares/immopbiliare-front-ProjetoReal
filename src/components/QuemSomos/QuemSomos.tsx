@@ -5,7 +5,7 @@ import imgQuemSomos from "../../assets/imgQuemSomos.jpg"
 
 export default function QuemSomos(){
     return (
-        <div className="md:h-[70vh] bg-verdePrincipal flex px-xGeralMobile">
+        <div className="md:min-h-[70vh] bg-verdePrincipal flex px-xGeralMobile">
             <div className="flex-1 flex flex-col">
                 <Titulo texto="Quem Somos"/>
                 <div className="flex flex-col flex-1 justify-evenly md:p-20 py-6 text-white text-lg font-[Montserrat] gap-6 md:gap-0">
