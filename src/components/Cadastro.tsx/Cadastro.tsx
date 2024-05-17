@@ -4,6 +4,7 @@ import { GeralContext } from "../../Contexts/ContextGeral/ContextGeral"
 import { PegarBairros, pegarTiposImoveis } from "../../Contexts/Functions/gettersFunctions"
 import ItemDeletar from "../ItemDeletar/ItemDeletar"
 import ModalCerteza from "../ModalCerteza/ModalCerteza"
+import ModalDesc from "../ModalDesc/ModalDesc"
 
 export type objImoveisType = {
     id: string,
@@ -14,7 +15,8 @@ export type objImoveisType = {
     numsuites: string,
     numvagas: string,
     preco: string,
-    codigo: string
+    codigo: string,
+    descricao: string
 }
 
 export default function Cadastro(){
@@ -35,16 +37,19 @@ export default function Cadastro(){
     const [idxUltimaClicada, setIdxUltimaClicada] = useState<number>() 
     const [novoBairro, setNovoBairro] = useState<string>("")
     const [novoBairro2, setNovoBairro2] = useState<string>("")
-    const[novoTipo, setNovoTipo] = useState<string>("")
-    const[novoTipo2, setNovoTipo2] = useState<string>("")
+    const [novoTipo, setNovoTipo] = useState<string>("")
+    const [novoTipo2, setNovoTipo2] = useState<string>("")
     const [bairros, setBairros] = useState<string[]>([])
     const [tiposImoveis, setTiposImoveis] = useState<string[]>([])
     const [temModalCerteza, setTemModalCerteza] = useState<boolean>(false)
+    const [temModalDesc, setTemModalDesc] = useState<boolean>(false)
     const [codigoItemDeletar, setCodigoItemDeletar] = useState<string>("")
     const [idItemDeletar, setIdItemDeletar] = useState<string>("")
     const [logged, setLogged] = useState<boolean>(false)
     const [emailLogin, setEmailLogin] = useState<string>("")
     const [senhaLogin, setSenhaLogin] = useState<string>("")
+    const [novaDescricao, setNovaDescricao] = useState<string>("") 
+    const [idAlterarDesc, setIdAlterarDesc] = useState<string>("")
 
     const [imoveisDeletar, setImoveisDeletar] = useState<objImoveisType[]>([])
 
@@ -80,7 +85,6 @@ export default function Cadastro(){
     }
 
     function cadastrarNovoImovel(){
-        if(bairro && tipoImovel && metragem && numQuartos && numSuites && numVagas && preco && codigo){
             console.log(fotoEnviar)
             const formData = new FormData()
             console.log(fotos)
@@ -92,9 +96,9 @@ export default function Cadastro(){
             formData.append("tipoImovel", tipoImovel)
             formData.append("metragem", metragem)
             formData.append("metragemFinal", metragemFinal)
-            formData.append("numQuartos", numQuartos)
-            formData.append("numSuites", numSuites)
-            formData.append("numVagas", numVagas)
+            formData.append("numQuartos", Number(numQuartos).toString())
+            formData.append("numSuites", Number(numSuites).toString())
+            formData.append("numVagas", Number(numVagas).toString())
             formData.append("preco", preco)
             formData.append("codigo", codigo)
             formData.append("numFotos", numeroFotos.toString())
@@ -102,7 +106,7 @@ export default function Cadastro(){
     
     
             
-    
+     
             fetch(import.meta.env.VITE_API_URL + "/cadastrarNovoImovel", {
                 method: "POST",
                 body: formData
@@ -116,10 +120,6 @@ export default function Cadastro(){
                     console.log(data)
                 }
             }).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao se conectar com o servidor, por favor cheque sua internet. Erro: ${err}`)})
-        }else{
-            setTemAviso(true)
-            setTextoAviso("preencha todos os campos de cadastro de imóvel, por favor")
-        }
     }
 
 
@@ -193,10 +193,38 @@ export default function Cadastro(){
         }
     }
 
+
+    useEffect(() => {
+        let idxAlterarDesc = imoveisDeletar.findIndex(item => item.id == idAlterarDesc)
+        if(idxAlterarDesc > -1){
+            setNovaDescricao(imoveisDeletar[idxAlterarDesc].descricao)
+        }
+    }, [idAlterarDesc])
+
+
     useEffect(() => {
         fetch(import.meta.env.VITE_API_URL + "/infoImoveis").then(res => res.json()).then(data => {setImoveisDeletar(data[1])}).catch((err) => {setTemAviso(true); setTextoAviso(`Ocorreu algum erro ao tentar pegar as informações, por favor cheque sua internet e recarregue a página. Erro: ${err}`)})
     }, [])
 
+
+    function mudarDescFn(){
+        fetch("http://localhost:8800/mudarDesc", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                idAlterarDesc,
+                novaDescricao
+            })
+        }).then(res => res.json()).then(data => {
+            if(data[0] == "erro"){
+                setTemAviso(true)
+                setTextoAviso(data[1])
+            }else{
+                setTemAviso(true)
+                setTextoAviso("descrição adicionada com sucesso")
+            }
+        }).catch(err => {setTemAviso(true); setTextoAviso("ocorreu algum erro ao mudar a descrição, por favor, tente novamente")})
+    }
 
 
     return (
@@ -279,8 +307,8 @@ export default function Cadastro(){
                         </div>
                     </div>
                     <div className="flex flex-col gap-16 items-center m-10">
-                        <div className="text-3xl">Deletar Imóveis</div>
-                        {imoveisDeletar.map(item => <ItemDeletar setCodigoItemDeletar={setCodigoItemDeletar} setIdItemDeletar={setIdItemDeletar} setTemModalCerteza={setTemModalCerteza} item={item} />)}
+                        <div className="text-3xl">Imóveis cadastrados</div>
+                        {imoveisDeletar.map(item => <ItemDeletar setCodigoItemDeletar={setCodigoItemDeletar} setIdItemDeletar={setIdItemDeletar} setIdAlterarDesc={setIdAlterarDesc} setTemModalDesc={setTemModalDesc} setTemModalCerteza={setTemModalCerteza} item={item} />)}
                     </div>
                     {
                         temModalCerteza && 
@@ -289,6 +317,10 @@ export default function Cadastro(){
                     {
                         temAviso &&
                         <TelaAviso texto={textoAviso} temAvisoFn={setTemAviso}/>
+                    }
+                                        {
+                        temModalDesc &&
+                        <ModalDesc setTemModalDesc={setTemModalDesc} novaDescricao={novaDescricao} setNovaDescricao={setNovaDescricao} mudarDescFn={mudarDescFn} />
                     }
                 </>
                 :
@@ -307,6 +339,7 @@ export default function Cadastro(){
                         temAviso &&
                         <TelaAviso texto={textoAviso} temAvisoFn={setTemAviso}/>
                     }
+
                 </div>
                     
             }

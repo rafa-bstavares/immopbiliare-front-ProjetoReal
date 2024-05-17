@@ -144,7 +144,7 @@ export default function PaginaPrincipal(){
                     {
                         pesquisa &&
                         <div className="md:grid md:grid-cols-3 md:gap-16 py-8 flex flex-col gap-10">
-                            {arrayImoveisPesquisa.map(item => <ImovelPesquisa imgs={item.imagens} id={item.id}/>)}
+                            {arrayImoveisPesquisa.map(item => <ImovelPesquisa modal={true} imgs={item.imagens} id={item.id}/>)}
                         </div>
                     }
                     <div className="flex gap-4 mt-4 md:flex-row flex-col">

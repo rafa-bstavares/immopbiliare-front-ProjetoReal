@@ -10,7 +10,8 @@ export type objImovel = {
     numsuites: string,
     numvagas: string,
     preco: string,
-    codigo: string
+    codigo: string,
+    descricao: string
 }
 
 type ContextoInfoImoveisTypes = {   

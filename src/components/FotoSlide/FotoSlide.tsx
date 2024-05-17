@@ -15,7 +15,7 @@ type Props = {
 export default function FotoSlide({img, id}: Props){
 
     const [showOverlay, setShowOverlay] = useState<boolean>(false)
-    const [infoAtual, setInfoAtual] = useState<objImovel[]>([{bairro: "", codigo: "", id: "", metragem: "", numquartos: "", numsuites: "", numvagas: "", preco: "", tipoimovel: "", metragemfinal: ""}])
+    const [infoAtual, setInfoAtual] = useState<objImovel[]>([{bairro: "", codigo: "", id: "", metragem: "", numquartos: "", numsuites: "", numvagas: "", preco: "", tipoimovel: "", metragemfinal: "", descricao: ""}])
     
     const {setTemAviso, setTextoAviso} = useContext(GeralContext)
     const {imoveisInfo} = useContext(ContextoInfoImoveis)
@@ -45,7 +45,7 @@ export default function FotoSlide({img, id}: Props){
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="absolute inset-0 flex justify-center items-center">
                     <div className="absolute bg-black opacity-60 h-full w-full"></div>
                     <motion.div initial={{y: 10}} animate={{y: 0}} exit={{y: 10}} className="text-white relative z-10">
-                        <EstruturaInfos numeroAreaFinal={Number(infoAtual[0].metragemfinal ? infoAtual[0].metragemfinal : Number(""))} numeroArea={Number(infoAtual[0].metragem ? infoAtual[0].metragem : Number(""))} numeroCodigo={infoAtual[0].codigo ? infoAtual[0].codigo : ""} numeroPreco={Number(infoAtual[0].preco) ? Number(infoAtual[0].preco) : Number("")} numeroQuartos={Number(infoAtual[0].numquartos) ? Number(infoAtual[0].numquartos) : Number("")} numeroSuites={Number(infoAtual[0].numsuites) ? Number(infoAtual[0].numsuites) : Number("")} numeroVagas={Number(infoAtual[0].numvagas) ? Number(infoAtual[0].numvagas) : Number("")} alturaFoto={true} temBotao={false}/>
+                        <EstruturaInfos lerMais={true} modal={false} descricao={infoAtual[0].descricao} numeroAreaFinal={Number(infoAtual[0].metragemfinal ? infoAtual[0].metragemfinal : Number(""))} numeroArea={Number(infoAtual[0].metragem)} numeroCodigo={infoAtual[0].codigo ? infoAtual[0].codigo : ""} numeroPreco={Number(infoAtual[0].preco) ? Number(infoAtual[0].preco) : Number("")} numeroQuartos={Number(infoAtual[0].numquartos)} numeroSuites={Number(infoAtual[0].numsuites)} numeroVagas={Number(infoAtual[0].numvagas)} alturaFoto={true} temBotao={false}/>
                     </motion.div>    
                 </motion.div>}
             </AnimatePresence>
