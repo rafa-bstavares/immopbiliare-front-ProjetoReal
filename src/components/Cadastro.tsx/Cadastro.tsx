@@ -223,7 +223,7 @@ export default function Cadastro(){
                 setTemAviso(true)
                 setTextoAviso("descrição adicionada com sucesso")
             }
-        }).catch(err => {setTemAviso(true); setTextoAviso("ocorreu algum erro ao mudar a descrição, por favor, tente novamente")})
+        }).catch(() => {setTemAviso(true); setTextoAviso("ocorreu algum erro ao mudar a descrição, por favor, tente novamente")})
     }
 
 
