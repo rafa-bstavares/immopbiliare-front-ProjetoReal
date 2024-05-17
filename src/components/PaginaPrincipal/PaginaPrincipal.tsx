@@ -157,7 +157,7 @@ export default function PaginaPrincipal(){
                 </div>
                 <div className="flex flex-col items-center gap-4 md:pb-10 pb-2">
                     <div className="md:text-2xl text-sm text-center">
-                        passe o mouse nos imóveis abaixo e veja mais detalhes
+                        interaja e clique nos imóveis abaixo para veja mais detalhes
                     </div>  
                     <img src={Seta} alt="seta para baixo" className="w-6 h-6"/>
                 </div>

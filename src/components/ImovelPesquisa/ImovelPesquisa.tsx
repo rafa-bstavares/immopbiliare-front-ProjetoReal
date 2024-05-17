@@ -49,9 +49,9 @@ console.log(infoAtual)
     }
 
     return (
-        <div className={`md:w-larguraFotoSlide w-larguraFotoSlideMobile flex flex-col`}>
+        <div className={`w-full flex flex-col items-center`}>
             <div className="relative w-full">
-                <img src={imgs[idxImagem]} alt="imagem da pesquisa" className="rounded-t-md w-full md:h-alturaFotoSlide h-alturaFotoSlideMobile object-cover" />
+                <img src={imgs[idxImagem]} alt="imagem da pesquisa" className="rounded-t-md aspect-video object-cover" />
                 <div onClick={setaTras} className="absolute w-12 h-12 p-[10px] left-0 top-1/2 z-10 bg-verdeMaisEscuro translate-x-[-60%] translate-y-[-50%] cursor-pointer rotate-90 rounded-full flex justify-center items-center"><img className="w-2/3 h-2/3" src={seta} alt="seta esquerda slide" /></div>
                 <div onClick={setaFrente} className="absolute w-12 h-12 p-[10px] right-0 top-1/2 z-10 bg-verdeMaisEscuro translate-x-[60%] translate-y-[-50%] cursor-pointer -rotate-90 rounded-full flex justify-center items-center"><img className="w-2/3 h-2/3" src={seta} alt="seta seta direita slide" /></div>
             </div>

@@ -38,7 +38,7 @@ export default function FotoSlide({img, id}: Props){
 
 
     return (
-        <motion.div onClick={() => {abrirModalImovel()}} onHoverStart={() => setShowOverlay(true)} onHoverEnd={() => setShowOverlay(false)} className={`h-full md:w-[22vw] w-[60vw] relative cursor-pointer`}>
+        <motion.div onClick={() => {abrirModalImovel()}} onHoverStart={() => setShowOverlay(true)} onHoverEnd={() => setShowOverlay(false)} className={`aspect-video relative cursor-pointer`}>
             <img className="h-full w-full object-cover" src={img} alt="foto slide" />
             <AnimatePresence>
                 {showOverlay && 

@@ -27,7 +27,7 @@ export default function EstruturaInfos({numeroArea, numeroQuartos, numeroSuites,
 
     return(
         <div className={`group md:w-larguraFotoSlide w-full  p-2 flex flex-col justify-evenly items-center md:h-${alturaFoto? "alturaFotoSlide" : "auto"}`}>
-            <div className="flex-6 flex py-2 w-full">
+            <div className="flex-6 items-center md:items-stretch flex py-2 w-full">
                 {
                     numeroArea > 0 &&
                     <div className="h-full flex-1 flex flex-col justify-center items-center p-2 "><span className="">{numeroArea == numeroAreaFinal ? numeroArea + "m²" : <div><span>{`De ${numeroArea}m²`}</span><br/><span>{`à ${numeroAreaFinal}m²`}</span></div>}</span>Área Útil</div>
@@ -47,9 +47,8 @@ export default function EstruturaInfos({numeroArea, numeroQuartos, numeroSuites,
             </div>
             <hr />
             <div className="flex-4 flex py-2 flex-col">
-                <div className=" flex flex-row gap-4 justify-center">
-                    <div>Venda: <span className="font-bold">R$ {numPrecoTratado}</span></div>
-                    <div>Código: <span className="font-bold">{numeroCodigo}</span></div>
+                <div className="text-sm flex flex-row gap-4 justify-center">
+                    Valor sob consulta
                 </div>
                 {
                     temBotao &&

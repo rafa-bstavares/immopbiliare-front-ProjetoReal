@@ -29,7 +29,6 @@ export default function Cadastro(){
     const [numQuartos, setNumQuartos] = useState<string>("")
     const [numSuites, setNumSuites] = useState<string>("")
     const [numVagas, setNumVagas] = useState<string>("")
-    const [preco, setPreco] = useState<string>("")
     const [codigo, setCodigo] = useState<string>("")
     const [numeroFotos, setNumeroFotos] = useState<number>(1)
     const [arrNumFotos, setArrNumFotos] = useState<string[]>([])
@@ -55,6 +54,7 @@ export default function Cadastro(){
 
     const ordinalidade = ['primeira', 'segunda', 'terceira', 'quarta', 'quinta', 'sexta', 'sétima', 'oitava', 'nona', 'décima', 'décima primeira', 'décima segunda', 'décima terceira', 'décima quarta', 'décima quinta']
     
+    const preco = "0"
 
     const ref = useRef<HTMLInputElement>(null)
 
@@ -276,10 +276,6 @@ export default function Cadastro(){
                             <div className="flex flex-col items-start">
                                 <label htmlFor="numeroVagas">Número de vagas<br/><div className="text-sm">*apenas números</div></label>
                                 <input onChange={(e) => setNumVagas(e.target.value)} type="number" id="numeroVagas" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
-                            </div>
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="numeroPreco">Preço <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, apenas para números quebrados , numeros inteiros colocar sem vírgula e ponto</div></label>
-                                <input onChange={(e) => setPreco(e.target.value)} type="number" id="numeroPreco" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
                             <div className="flex flex-col items-start">
                                 <label htmlFor="numeroCódigo">Código<br/></label>

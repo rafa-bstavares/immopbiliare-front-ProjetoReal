@@ -18,7 +18,7 @@ export default function ModalSlide({id, imgs}: Props){
 
     return (
         <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50 text-white">
-            <div className="flex flex-col items-center justify-center border-solid border-white border-2 rounded-lg">
+            <div className="flex flex-col items-center  border-solid border-white border-2 rounded-lg min-h-[90vh] md:w-[50vw] w-[90vw]">
                 <div>
                     <ImovelPesquisa imgs={imgs} id={id} modal={true}/>
                 </div>
