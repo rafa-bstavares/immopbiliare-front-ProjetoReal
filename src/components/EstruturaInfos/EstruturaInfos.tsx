@@ -17,13 +17,11 @@ type Props = {
     lerMais?: boolean
 }
 
-export default function EstruturaInfos({numeroArea, numeroQuartos, numeroSuites, numeroVagas, numeroPreco, numeroCodigo, alturaFoto, temBotao, numeroAreaFinal, modal, lerMais, descricao}: Props){
+export default function EstruturaInfos({numeroArea, numeroQuartos, numeroSuites, numeroVagas, alturaFoto, temBotao, numeroAreaFinal, modal, lerMais, descricao}: Props){
 
     useEffect(() => {
         console.log(modal)
     }, [])
-
-    let numPrecoTratado = numeroPreco
 
     return(
         <div className={`group md:w-larguraFotoSlide w-full  p-2 flex flex-col justify-evenly items-center md:h-${alturaFoto? "alturaFotoSlide" : "auto"}`}>
