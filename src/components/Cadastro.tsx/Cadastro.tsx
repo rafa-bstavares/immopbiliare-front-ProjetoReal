@@ -12,7 +12,9 @@ export type objImoveisType = {
     tipoimovel: string,
     metragem: string,
     numquartos: string,
+    numquartosfinal: string,
     numsuites: string,
+    numsuitesfinal: string,
     numvagas: string,
     preco: string,
     codigo: string,
@@ -27,7 +29,9 @@ export default function Cadastro(){
     const [metragem, setMetragem] = useState<string>("")
     const [metragemFinal, setMetragemFinal] = useState<string>("")
     const [numQuartos, setNumQuartos] = useState<string>("")
+    const [numQuartosFinal, setNumQuartosFinal] = useState<string>("")
     const [numSuites, setNumSuites] = useState<string>("")
+    const [numSuitesFinal, setNumSuitesFinal] = useState<string>("")
     const [numVagas, setNumVagas] = useState<string>("")
     const [codigo, setCodigo] = useState<string>("")
     const [numeroFotos, setNumeroFotos] = useState<number>(1)
@@ -97,7 +101,9 @@ export default function Cadastro(){
             formData.append("metragem", metragem)
             formData.append("metragemFinal", metragemFinal)
             formData.append("numQuartos", Number(numQuartos).toString())
+            formData.append("numQuartosFinal", Number(numQuartosFinal).toString())
             formData.append("numSuites", Number(numSuites).toString())
+            formData.append("numSuitesFinal", Number(numSuitesFinal).toString())
             formData.append("numVagas", Number(numVagas).toString())
             formData.append("preco", preco)
             formData.append("codigo", codigo)
@@ -261,17 +267,19 @@ export default function Cadastro(){
                                 </select>
                             </div>
                             <div className="flex flex-col items-start gap-1">
-                                <label htmlFor="numeroMetragem">Metragem <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, caso necessário</div></label>
+                                <label htmlFor="numeroMetragem">Metragem <br/><div className="text-sm">*apenas números, ao invés de vírgula utilizar ponto, caso necessário. Caso não haja variação na metragem, coloque o mesmo número nos dois campos</div></label>
                                 <input placeholder="a partir de..." onChange={(e) => setMetragem(e.target.value)} type="number" id="numeroMetragem" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                                 <input placeholder="até..." onChange={(e) => setMetragemFinal(e.target.value)} type="number" id="numeroMetragemFinal" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="numeroQuartos">Número de dormitórios<br/><div className="text-sm">*apenas números</div></label>
-                                <input onChange={(e) => setNumQuartos(e.target.value)} type="number" id="numeroQuartos" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            <div className="flex flex-col items-start gap-1">
+                                <label htmlFor="numeroQuartos">Número de dormitórios<br/><div className="text-sm">*apenas número. Caso não haja variação na quantidade de dormitórios, coloque o mesmo número nos dois campos</div></label>
+                                <input placeholder="de..." onChange={(e) => setNumQuartos(e.target.value)} type="number" id="numeroQuartos" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                                <input placeholder="até..." onChange={(e) => setNumQuartosFinal(e.target.value)} type="number" id="numeroQuartosFinal" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
-                            <div className="flex flex-col items-start">
-                                <label htmlFor="numeroSuites">Número de suítes<br/><div className="text-sm">*apenas números</div></label>
-                                <input onChange={(e) => setNumSuites(e.target.value)} type="number" id="numeroSuites" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                            <div className="flex flex-col items-start gap-1">
+                                <label htmlFor="numeroSuites">Número de suítes<br/><div className="text-sm">*apenas números. Caso não haja variação na quantidade de suítes, coloque o mesmo número nos dois campos</div></label>
+                                <input placeholder="de..." onChange={(e) => setNumSuites(e.target.value)} type="number" id="numeroSuites" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
+                                <input placeholder="até..." onChange={(e) => setNumSuitesFinal(e.target.value)} type="number" id="numeroSuitesFinal" className="border-2 border-black border-solid rounded-sm px-2 py-1 w-50 text-black"/>
                             </div>
                             <div className="flex flex-col items-start">
                                 <label htmlFor="numeroVagas">Número de vagas<br/><div className="text-sm">*apenas números</div></label>

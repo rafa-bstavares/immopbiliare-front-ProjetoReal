@@ -7,7 +7,9 @@ export type objImovel = {
     metragem: string,
     metragemfinal: string,
     numquartos: string,
+    numquartosfinal: string
     numsuites: string,
+    numsuitesfinal: string,
     numvagas: string,
     preco: string,
     codigo: string,

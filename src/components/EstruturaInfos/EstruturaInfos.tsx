@@ -5,7 +5,9 @@ type Props = {
     numeroArea: number,
     numeroAreaFinal: number,
     numeroQuartos: number,
+    numQuartosFinal: number
     numeroSuites: number,
+    numSuitesFinal: number,
     numeroVagas: number,
     numeroPreco: number,
     numeroCodigo: string,
@@ -17,7 +19,7 @@ type Props = {
     lerMais?: boolean
 }
 
-export default function EstruturaInfos({numeroArea, numeroQuartos, numeroSuites, numeroVagas, alturaFoto, temBotao, numeroAreaFinal, modal, lerMais, descricao}: Props){
+export default function EstruturaInfos({numeroArea, numeroQuartos, numQuartosFinal, numeroSuites, numSuitesFinal, numeroVagas, alturaFoto, temBotao, numeroAreaFinal, modal, lerMais, descricao}: Props){
 
     useEffect(() => {
         console.log(modal)
@@ -32,11 +34,11 @@ export default function EstruturaInfos({numeroArea, numeroQuartos, numeroSuites,
                 }
                 {
                     numeroQuartos > 0 &&
-                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex justify-center items-center p-2">{numeroQuartos} Dormitórios</div>
+                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex flex-col justify-center items-center p-2">{numeroQuartos == numQuartosFinal ? numeroQuartos : <div><span>{`De ${numeroQuartos}`}</span><br/><span>{`à ${numQuartosFinal}`}</span></div>} Dormitórios</div>
                 }
                 {
                     numeroSuites > 0 &&
-                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex justify-center items-center p-2">{numeroSuites} Suítes</div> 
+                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex flex-col justify-center items-center p-2">{numeroSuites == numSuitesFinal ? numeroSuites : <div><span>{`De ${numeroSuites}`}</span><br/><span>{`à ${numSuitesFinal}`}</span></div>} Suítes</div> 
                 }
                 {
                     numeroVagas > 0 && 
