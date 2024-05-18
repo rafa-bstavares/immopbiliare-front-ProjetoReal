@@ -34,15 +34,15 @@ export default function EstruturaInfos({numeroArea, numeroQuartos, numQuartosFin
                 }
                 {
                     numeroQuartos > 0 &&
-                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex flex-col justify-center items-center p-2">{numeroQuartos == numQuartosFinal ? numeroQuartos : <div><span>{`De ${numeroQuartos}`}</span><br/><span>{`à ${numQuartosFinal}`}</span></div>} Dormitórios</div>
+                    <div className="border-l-[1px] border-solid border-white flex-1 flex flex-col justify-center items-center p-2">{numeroQuartos == numQuartosFinal ? numeroQuartos : <div><span>{`De ${numeroQuartos}`}</span><br/><span>{`à ${numQuartosFinal}`}</span></div>} Dormitórios</div>
                 }
                 {
                     numeroSuites > 0 &&
-                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex flex-col justify-center items-center p-2">{numeroSuites == numSuitesFinal ? numeroSuites : <div><span>{`De ${numeroSuites}`}</span><br/><span>{`à ${numSuitesFinal}`}</span></div>} Suítes</div> 
+                    <div className="border-l-[1px] border-solid border-white flex-1 flex flex-col justify-center items-center p-2">{numeroSuites == numSuitesFinal ? numeroSuites : <div><span>{`De ${numeroSuites}`}</span><br/><span>{`à ${numSuitesFinal}`}</span></div>} Suítes</div> 
                 }
                 {
                     numeroVagas > 0 && 
-                    <div className="border-l-[1px] border-solid border-white h-full flex-1 flex justify-center items-center p-2">{numeroVagas} vagas</div>
+                    <div className="border-l-[1px] border-solid border-white flex-1 flex justify-center items-center p-2">{numeroVagas} vagas</div>
                 }
             </div>
             <hr />
