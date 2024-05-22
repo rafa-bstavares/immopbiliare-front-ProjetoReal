@@ -171,7 +171,7 @@ export default function PaginaPrincipal(){
                 temModalSlide && 
                 <ModalSlide id={idAtualModal} imgs={imovelModal[0].imagens} />
             }
-            <div className="fixed group right-4 bottom-4 flex gap-2">
+            <div className="fixed group right-4 bottom-4 flex gap-2 z-[80]">
                 <a href="https://wa.me//5511996794402?text=Tenho%20interesse%20nos%20imóveis%20que%20vi%20no%20site" target="_blank" className="w-14 h-14 bg-white z-40 cursor-pointer rounded-full hover:scale-125 transition-all flex items-center justify-center">
                     <IconeWpp color={"#214E34"} heightIcon={"60%"} widthIcon={"60%"}/>
                 </a>

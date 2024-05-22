@@ -8,8 +8,8 @@ import { ContextoInfoImoveis } from "../../Contexts/ContextoInfoImoveis/Contexto
 export default function SlideFinal(){
 
 
-    const slideRapido = 30
-    const slideDevagar = 85
+    const slideRapido = 50
+    const slideDevagar = 100
     const [duration, setDuration] = useState<number>(slideRapido)
     const [arrayFotosTela, setArrayFotosTela] = useState<string[][]>([])
 

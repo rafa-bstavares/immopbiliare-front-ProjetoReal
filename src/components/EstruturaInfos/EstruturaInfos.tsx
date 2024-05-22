@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import Botao from "../Botao/Botao"
+import { ContextoModalSlide } from "../../Contexts/ContextoModalSlide/ContextoModalSlide"
 
 type Props = {
     numeroArea: number,
@@ -25,9 +26,11 @@ export default function EstruturaInfos({numeroArea, numeroQuartos, numQuartosFin
         console.log(modal)
     }, [])
 
+    const {setTemModalSlide} = useContext(ContextoModalSlide)
+
     return(
-        <div className={`group md:w-larguraFotoSlide w-full  p-2 flex flex-col justify-evenly items-center md:h-${alturaFoto? "alturaFotoSlide" : "auto"}`}>
-            <div className="flex-6 items-center md:items-stretch flex py-2 w-full">
+        <div className={`group md:w-larguraFotoSlide w-full md:p-2 flex flex-col justify-evenly items-center md:h-${alturaFoto? "alturaFotoSlide" : "auto"}`}>
+            <div className="flex-6 grid grid-cols-2 py-2 w-full md:flex md:">
                 {
                     numeroArea > 0 &&
                     <div className="h-full flex-1 flex flex-col justify-center items-center p-2 "><span className="">{numeroArea == numeroAreaFinal ? numeroArea + "m²" : <div><span>{`De ${numeroArea}m²`}</span><br/><span>{`à ${numeroAreaFinal}m²`}</span></div>}</span>Área Útil</div>
@@ -50,10 +53,18 @@ export default function EstruturaInfos({numeroArea, numeroQuartos, numQuartosFin
                 <div className="text-sm flex flex-row gap-4 justify-center">
                     Valor sob consulta
                 </div>
-                {
-                    temBotao &&
-                    <Botao btTexto="conversar sobre o imóvel" temImg={true} imgWpp={true} temaClaro={true} btPequeno/>
-                }
+                <div className="flex md:flex-row flex-col gap-2 items-center">
+                    {
+                        temBotao &&
+                        <Botao btTexto="conversar sobre o imóvel" temImg={true} imgWpp={true} temaClaro={true} btPequeno/>
+                    }
+                    {
+                        modal &&
+                        <div onClick={() => setTemModalSlide(false)} className="text-white text-lg py-2 px-4 rounded-sm bg-laranjaPrincipal cursor-pointer my-5">
+                            Voltar
+                        </div>
+                    }
+                </div>
             </div>
             {
                 descricao && 
