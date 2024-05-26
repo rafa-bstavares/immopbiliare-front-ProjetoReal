@@ -24,7 +24,7 @@ export default function QuemSomos(){
                 </div>
             </div>
             <div className="flex-1 md:block hidden">
-                <img className="h-full w-full object-cover py-10" src={imgQuemSomos} alt="imagem" />
+                <img className="h-full w-full object-cover py-10" src={imgQuemSomos} alt="imagem" loading="lazy"/>
             </div>
         </div>
     )
